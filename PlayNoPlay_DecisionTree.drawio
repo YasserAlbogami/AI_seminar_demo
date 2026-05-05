@@ -1,0 +1,79 @@
+<mxfile host="65bd71144e">
+    <diagram id="o2eELHzlRFy3CCqrpl1L" name="Page-1">
+        <mxGraphModel dx="1661" dy="974" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="&lt;b&gt;Decision Tree: Play or Not Play?&lt;/b&gt;&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontColor=#1A237E;" parent="1" vertex="1">
+                    <mxGeometry x="327" y="20" width="1000" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="parent_calc" value="&lt;b&gt;Parent Node: All 14 instances&lt;/b&gt;&lt;br&gt;9 Yes  |  5 No&lt;br&gt;H(parent) = −(9/14)·log₂(9/14) − (5/14)·log₂(5/14)&lt;br&gt;&lt;b&gt;H(parent) = 0.940 bits&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#1A237E;fontColor=#1A237E;fontSize=11;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="527" y="100" width="600" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="ig_compare" value="&lt;b&gt;Information Gain Comparison (Step 1: Choose Root)&lt;/b&gt;&lt;br&gt;IG(Outlook) = 0.940 − 0.693 = &lt;b&gt;0.247 ✓ HIGHEST&lt;/b&gt;&lt;br&gt;IG(Humidity) = 0.940 − 0.789 = 0.151&lt;br&gt;IG(Windy) = 0.940 − 0.892 = 0.048&lt;br&gt;IG(Temperature) = 0.940 − 0.911 = 0.029" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F57F17;fontColor=#212121;fontSize=11;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="527" y="200" width="600" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_to_root" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#1A237E;strokeWidth=2;" parent="1" source="ig_compare" target="root_node" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="root_node" value="&lt;b&gt;Outlook&lt;/b&gt;&lt;br&gt;[14 instances: 9 Yes, 5 No]&lt;br&gt;H = 0.940 | IG = 0.247" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1A237E;strokeColor=#0D47A1;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="627" y="320" width="400" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_sunny" value="&lt;b&gt;sunny&lt;/b&gt;&lt;br&gt;5 instances" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#D32F2F;strokeWidth=2;fontColor=#D32F2F;fontSize=11;fontStyle=1;" parent="1" source="root_node" target="sunny_node" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="sunny_node" value="&lt;b&gt;Humidity&lt;/b&gt;&lt;br&gt;[5 instances: 2 Yes, 3 No]&lt;br&gt;H(sunny) = 0.971&lt;br&gt;IG(Humidity) = 0.971 − 0.000 = &lt;b&gt;0.971&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1565C0;strokeColor=#0D47A1;fontColor=#FFFFFF;fontSize=11;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="130" y="500" width="360" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_high" value="&lt;b&gt;high&lt;/b&gt;&lt;br&gt;3 inst" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;strokeWidth=2;fontColor=#C62828;fontSize=11;fontStyle=1;" parent="1" source="sunny_node" target="leaf_no1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="leaf_no1" value="&lt;b&gt;NO&lt;/b&gt;&lt;br&gt;[3 instances]&lt;br&gt;3 No, 0 Yes&lt;br&gt;H = 0.000 (pure)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="20" y="700" width="200" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_normal1" value="&lt;b&gt;normal&lt;/b&gt;&lt;br&gt;2 inst" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;strokeWidth=2;fontColor=#2E7D32;fontSize=11;fontStyle=1;" parent="1" source="sunny_node" target="leaf_yes1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="leaf_yes1" value="&lt;b&gt;YES&lt;/b&gt;&lt;br&gt;[2 instances]&lt;br&gt;2 Yes, 0 No&lt;br&gt;H = 0.000 (pure)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="260" y="700" width="200" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_overcast" value="&lt;b&gt;overcast&lt;/b&gt;&lt;br&gt;4 instances" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;strokeWidth=2;fontColor=#2E7D32;fontSize=11;fontStyle=1;" parent="1" source="root_node" target="leaf_yes2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="leaf_yes2" value="&lt;b&gt;YES&lt;/b&gt;&lt;br&gt;[4 instances]&lt;br&gt;4 Yes, 0 No&lt;br&gt;H = 0.000 (pure)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="727" y="510" width="200" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_rain" value="&lt;b&gt;rain&lt;/b&gt;&lt;br&gt;5 instances" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#D32F2F;strokeWidth=2;fontColor=#D32F2F;fontSize=11;fontStyle=1;" parent="1" source="root_node" target="rain_node" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rain_node" value="&lt;b&gt;Windy&lt;/b&gt;&lt;br&gt;[5 instances: 3 Yes, 2 No]&lt;br&gt;H(rain) = 0.971&lt;br&gt;IG(Windy) = 0.971 − 0.000 = &lt;b&gt;0.971&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1565C0;strokeColor=#0D47A1;fontColor=#FFFFFF;fontSize=11;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="1160" y="500" width="360" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_false" value="&lt;b&gt;false&lt;/b&gt;&lt;br&gt;3 inst" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;strokeWidth=2;fontColor=#2E7D32;fontSize=11;fontStyle=1;" parent="1" source="rain_node" target="leaf_yes3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="leaf_yes3" value="&lt;b&gt;YES&lt;/b&gt;&lt;br&gt;[3 instances]&lt;br&gt;3 Yes, 0 No&lt;br&gt;H = 0.000 (pure)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="1170" y="700" width="200" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_true" value="&lt;b&gt;true&lt;/b&gt;&lt;br&gt;2 inst" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;strokeWidth=2;fontColor=#C62828;fontSize=11;fontStyle=1;" parent="1" source="rain_node" target="leaf_no2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="leaf_no2" value="&lt;b&gt;NO&lt;/b&gt;&lt;br&gt;[2 instances]&lt;br&gt;2 No, 0 Yes&lt;br&gt;H = 0.000 (pure)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="1410" y="700" width="200" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="calc_sunny" value="&lt;b&gt;Sunny Branch Calculation:&lt;/b&gt;&lt;br&gt;5 inst: 2 Yes, 3 No&lt;br&gt;Try Humidity:&lt;br&gt;  high (3 inst): 0 Yes, 3 No → H=0.000&lt;br&gt;  normal (2 inst): 2 Yes, 0 No → H=0.000&lt;br&gt;Weighted H = (3/5)×0 + (2/5)×0 = 0.000&lt;br&gt;&lt;b&gt;IG(Humidity|sunny) = 0.971 − 0.000 = 0.971&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontColor=#0D47A1;fontSize=10;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="20" y="870" width="380" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="calc_rain" value="&lt;b&gt;Rain Branch Calculation:&lt;/b&gt;&lt;br&gt;5 inst: 3 Yes, 2 No&lt;br&gt;Try Windy:&lt;br&gt;  false (3 inst): 3 Yes, 0 No → H=0.000&lt;br&gt;  true (2 inst): 0 Yes, 2 No → H=0.000&lt;br&gt;Weighted H = (3/5)×0 + (2/5)×0 = 0.000&lt;br&gt;&lt;b&gt;IG(Windy|rain) = 0.971 − 0.000 = 0.971&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontColor=#0D47A1;fontSize=10;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="1250" y="870" width="380" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="calc_outlook" value="&lt;b&gt;Root Split IG Calculation — Outlook:&lt;/b&gt;&lt;br&gt;sunny (5/14): H = −(2/5)log₂(2/5) − (3/5)log₂(3/5) = 0.971&lt;br&gt;overcast (4/14): H = −(4/4)log₂(1) = 0.000  ← pure!&lt;br&gt;rain (5/14): H = −(3/5)log₂(3/5) − (2/5)log₂(2/5) = 0.971&lt;br&gt;Weighted Avg H = (5/14)×0.971 + (4/14)×0 + (5/14)×0.971 = 0.693&lt;br&gt;&lt;b&gt;IG(Outlook) = 0.940 − 0.693 = 0.247 ✓&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F9A825;fontColor=#212121;fontSize=10;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="430" y="870" width="800" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend" value="&lt;b&gt;Legend:&lt;/b&gt;  Ellipse = Decision Node  |  Rounded rect = Leaf Node  |  Green = YES  |  Red = NO  |  Blue header = navy (root/internal)  |  H = Entropy  |  IG = Information Gain" style="text;html=1;strokeColor=#CCCCCC;fillColor=#F5F5F5;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fontColor=#555555;" parent="1" vertex="1">
+                    <mxGeometry x="20" y="1040" width="1614" height="40" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

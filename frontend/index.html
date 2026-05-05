@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Senior Student Classifier — KAU</title>
+  <style>
+    :root {
+      --kau-green: #006633;
+      --kau-light: #e8f5ee;
+      --white: #ffffff;
+      --text-dark: #222222;
+      --border: #cccccc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--kau-light);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+
+    .container {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 32px;
+      width: 100%;
+      max-width: 560px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    header {
+      background: var(--kau-green);
+      color: var(--white);
+      padding: 20px;
+      border-radius: 6px;
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    header h1 {
+      font-size: 1.3rem;
+      margin-bottom: 4px;
+    }
+
+    header p {
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: var(--kau-green);
+    }
+
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      background: var(--white);
+      cursor: pointer;
+      appearance: auto;
+    }
+
+    select:focus {
+      outline: 2px solid var(--kau-green);
+      outline-offset: 1px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 13px;
+      margin-top: 8px;
+      background: var(--kau-green);
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      letter-spacing: 0.4px;
+    }
+
+    button[type="submit"]:hover {
+      opacity: 0.88;
+    }
+
+    /* Result banner */
+    .result {
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+
+    .result.senior {
+      background: var(--kau-green);
+      color: var(--white);
+    }
+
+    .result.not-senior {
+      background: #f0f0f0;
+      color: #444;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>King Abdulaziz University</h1>
+      <p>CPCS-331 Artificial Intelligence — Senior Classifier</p>
+    </header>
+
+    <form id="predictForm">
+
+      <div class="form-group">
+        <label for="DS204">Data Structures I (CPCS-204)</label>
+        <select id="DS204" name="DS204">
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="Algo223">Algorithms (CPCS-223)</label>
+        <select id="Algo223" name="Algo223">
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="OS361">Operating Systems I (CPCS-361)</label>
+        <select id="OS361" name="OS361">
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="AI331">Artificial Intelligence I (CPCS-331)</label>
+        <select id="AI331" name="AI331">
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="Compiler302">Compiler Construction (CPCS-302)</label>
+        <select id="Compiler302" name="Compiler302">
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="Training323">Summer Training (CPCS-323)</label>
+        <select id="Training323" name="Training323">
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+      </div>
+
+      <button type="submit">Check Senior Status</button>
+    </form>
+
+    <!-- Prediction result shown here after submit -->
+    <div id="result" class="result hidden"></div>
+  </div>
+
+  <script>
+    document.getElementById('predictForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      // Collect the value of each dropdown
+      const data = {
+        DS204:       document.getElementById('DS204').value,
+        Algo223:     document.getElementById('Algo223').value,
+        OS361:       document.getElementById('OS361').value,
+        AI331:       document.getElementById('AI331').value,
+        Compiler302: document.getElementById('Compiler302').value,
+        Training323: document.getElementById('Training323').value,
+      };
+
+      // Send the data to the FastAPI backend
+      const response = await fetch('http://localhost:8000/predict', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      // Show the result with appropriate styling
+      const resultDiv = document.getElementById('result');
+      resultDiv.textContent = result.prediction;
+      resultDiv.className = 'result ' + (result.prediction === 'Senior' ? 'senior' : 'not-senior');
+    });
+  </script>
+</body>
+</html>

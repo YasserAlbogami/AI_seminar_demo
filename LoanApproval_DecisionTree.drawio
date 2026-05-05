@@ -1,0 +1,70 @@
+<mxfile host="65bd71144e">
+    <diagram id="Og1hMQ2L31-Td3lkWvzH" name="Page-1">
+        <mxGraphModel dx="2215" dy="1298" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="&lt;b&gt;Decision Tree: Loan Approval Prediction&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontColor=#1A237E;" parent="1" vertex="1">
+                    <mxGeometry x="327" y="20" width="1000" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="parent_calc" value="&lt;b&gt;Parent Node: All 10 instances&lt;/b&gt;&lt;br&gt;4 Approve  |  6 Deny&lt;br&gt;H(parent) = −(4/10)·log₂(4/10) − (6/10)·log₂(6/10)&lt;br&gt;= −(0.4)·(−1.322) − (0.6)·(−0.737)&lt;br&gt;&lt;b&gt;H(parent) = 0.971 bits&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#1A237E;fontColor=#1A237E;fontSize=11;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="477" y="100" width="700" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="ig_compare" value="&lt;b&gt;Information Gain Comparison (Step 1: Choose Root)&lt;/b&gt;&lt;br&gt;IG(Credit Score) = 0.971 − 0.361 = &lt;b&gt;0.610 ✓ HIGHEST → Root Node&lt;/b&gt;&lt;br&gt;IG(Income)       = 0.971 − 0.600 = 0.371&lt;br&gt;IG(Employed)     = 0.971 − 0.951 = 0.020" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F57F17;fontColor=#212121;fontSize=11;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="477" y="210" width="700" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_to_root" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#1A237E;strokeWidth=2;" parent="1" source="ig_compare" target="root_node" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="root_node" value="&lt;b&gt;Credit Score&lt;/b&gt;&lt;br&gt;[10 instances: 4 Approve, 6 Deny]&lt;br&gt;H = 0.971  |  IG = 0.610" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1A237E;strokeColor=#0D47A1;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="577" y="330" width="500" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_poor" value="&lt;b&gt;poor&lt;/b&gt;&lt;br&gt;5 instances" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;strokeWidth=2;fontColor=#C62828;fontSize=11;fontStyle=1;exitX=0.2;exitY=1;exitDx=0;exitDy=0;" parent="1" source="root_node" target="leaf_deny_pure" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="leaf_deny_pure" value="&lt;b&gt;DENY&lt;/b&gt;&lt;br&gt;[5 instances]&lt;br&gt;0 Approve, 5 Deny&lt;br&gt;H = 0.000 (pure)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;fontSize=12;fontStyle=1;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="160" y="510" width="240" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_good" value="&lt;b&gt;good&lt;/b&gt;&lt;br&gt;5 instances" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;strokeWidth=2;fontColor=#2E7D32;fontSize=11;fontStyle=1;exitX=0.8;exitY=1;exitDx=0;exitDy=0;" parent="1" source="root_node" target="income_node" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="income_node" value="&lt;b&gt;Income&lt;/b&gt;&lt;br&gt;[5 instances: 4 Approve, 1 Deny]&lt;br&gt;H(good) = 0.722&lt;br&gt;IG(Income) = 0.722 − 0.000 = &lt;b&gt;0.722&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1565C0;strokeColor=#0D47A1;fontColor=#FFFFFF;fontSize=11;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="1000" y="500" width="420" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_high" value="&lt;b&gt;high&lt;/b&gt;&lt;br&gt;2 inst" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;strokeWidth=2;fontColor=#2E7D32;fontSize=11;fontStyle=1;" parent="1" source="income_node" target="leaf_approve1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="leaf_approve1" value="&lt;b&gt;APPROVE&lt;/b&gt;&lt;br&gt;[2 instances]&lt;br&gt;2 Approve, 0 Deny&lt;br&gt;H = 0.000 (pure)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;fontSize=11;fontStyle=1;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="830" y="710" width="220" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_medium" value="&lt;b&gt;medium&lt;/b&gt;&lt;br&gt;2 inst" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;strokeWidth=2;fontColor=#2E7D32;fontSize=11;fontStyle=1;" parent="1" source="income_node" target="leaf_approve2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="leaf_approve2" value="&lt;b&gt;APPROVE&lt;/b&gt;&lt;br&gt;[2 instances]&lt;br&gt;2 Approve, 0 Deny&lt;br&gt;H = 0.000 (pure)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;fontSize=11;fontStyle=1;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="1090" y="710" width="220" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge_low" value="&lt;b&gt;low&lt;/b&gt;&lt;br&gt;1 inst" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;strokeWidth=2;fontColor=#C62828;fontSize=11;fontStyle=1;" parent="1" source="income_node" target="leaf_deny2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="leaf_deny2" value="&lt;b&gt;DENY&lt;/b&gt;&lt;br&gt;[1 instance]&lt;br&gt;0 Approve, 1 Deny&lt;br&gt;H = 0.000 (pure)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;fontSize=11;fontStyle=1;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="1350" y="710" width="220" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="calc_cs" value="&lt;b&gt;IG(Credit Score) Calculation:&lt;/b&gt;&lt;br&gt;poor  (5/10): 0 Approve, 5 Deny  → H = 0.000  ← pure!&lt;br&gt;good  (5/10): 4 Approve, 1 Deny  → H = −(4/5)log₂(4/5) − (1/5)log₂(1/5) = 0.722&lt;br&gt;Weighted Avg H = (5/10)×0.000 + (5/10)×0.722 = 0.361&lt;br&gt;&lt;b&gt;IG(Credit Score) = 0.971 − 0.361 = 0.610 ✓ HIGHEST → ROOT&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F9A825;fontColor=#212121;fontSize=10;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="20" y="870" width="620" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="calc_income" value="&lt;b&gt;IG(Income | Credit Score = good) Calculation:&lt;/b&gt;&lt;br&gt;high   (2/5): 2 Approve, 0 Deny → H = 0.000  ← pure!&lt;br&gt;medium (2/5): 2 Approve, 0 Deny → H = 0.000  ← pure!&lt;br&gt;low    (1/5): 0 Approve, 1 Deny → H = 0.000  ← pure!&lt;br&gt;Weighted Avg H = 0 + 0 + 0 = 0.000&lt;br&gt;&lt;b&gt;IG(Income) = 0.722 − 0.000 = 0.722 → Splits perfectly!&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontColor=#0D47A1;fontSize=10;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="820" y="870" width="620" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="calc_income_root" value="&lt;b&gt;IG(Income) at root — why NOT chosen:&lt;/b&gt;&lt;br&gt;high   (3/10): 2 Approve, 1 Deny → H = 0.918&lt;br&gt;medium (4/10): 2 Approve, 2 Deny → H = 1.000&lt;br&gt;low    (3/10): 0 Approve, 3 Deny → H = 0.000&lt;br&gt;Weighted H = (3/10)×0.918 + (4/10)×1.000 + (3/10)×0.000 = 0.675&lt;br&gt;&lt;b&gt;IG(Income) = 0.971 − 0.675 = 0.296  &lt; IG(Credit Score) = 0.610&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#AD1457;fontColor=#880E4F;fontSize=10;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="20" y="1010" width="620" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="calc_employed" value="&lt;b&gt;IG(Employed) at root — why NOT chosen:&lt;/b&gt;&lt;br&gt;yes (5/10): 3 Approve, 2 Deny → H = 0.971&lt;br&gt;no  (5/10): 1 Approve, 4 Deny → H = 0.722&lt;br&gt;Weighted H = (5/10)×0.971 + (5/10)×0.722 = 0.847&lt;br&gt;&lt;b&gt;IG(Employed) = 0.971 − 0.847 = 0.124  &lt; IG(Credit Score) = 0.610&lt;/b&gt;&lt;br&gt;Not used in final tree." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#AD1457;fontColor=#880E4F;fontSize=10;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="820" y="1010" width="620" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend" value="&lt;b&gt;Legend:&lt;/b&gt;  Ellipse = Decision Node  |  Rounded rect = Leaf Node  |  Green = APPROVE  |  Red = DENY  |  H = Entropy (bits)  |  IG = Information Gain  |  Yellow = chosen split  |  Pink = rejected splits" style="text;html=1;strokeColor=#CCCCCC;fillColor=#F5F5F5;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fontColor=#555555;" parent="1" vertex="1">
+                    <mxGeometry x="20" y="1155" width="1614" height="40" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
